@@ -5,24 +5,24 @@
 
 # app/controller/blog_posts_controller.rb
 
-# 1)
+# 1) this is a controller that houses the index (id) of the model
 class BlogPostsController < ApplicationController
   def index
-    # 2)
+    # 2) this deletegates all blogposts in the model to be housed in "index"
     @posts = BlogPost.all
   end
 
   def show
-    # 3)
+    # 3) this finds the id of the blogspot u want to display.
     @post = BlogPost.find(params[:id])
   end
 
-  # 4)
+  # 4) this doesn't do anything.
   def new
   end
 
   def create
-    # 5)
+    # 5)this creates a new blog post, if the post meets certain criteria.
     @post = BlogPost.create(blog_post_params)
     if @post.valid?
       redirect_to @post
@@ -36,15 +36,15 @@ class BlogPostsController < ApplicationController
     if @post.destroy
       redirect_to blog_posts_path
     else
-      # 6)
+      # 6)this redirects to the mainpain after deleteing an instance.
       redirect_to blog_post_path(@post)
     end
   end
 
-  # 7)
+  # 7)this makes something private so you can't see it with inspect in browser.
   private
   def blog_post_params
-    # 8)
+    # 8) this designates the required perameters when creating a new post
     params.require(:blog_post).permit(:title, :content)
   end
 
@@ -53,7 +53,7 @@ end
 
 # app/models/blog_post.rb
 
-# 9)
+# 9)this is the key
 class BlogPost < ApplicationRecord
   # 10)
   has_many :comments
